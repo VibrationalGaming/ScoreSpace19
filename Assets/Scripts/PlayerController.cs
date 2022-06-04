@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(force * power, ForceMode2D.Impulse);
 
 
-            // inAir = true;
+            inAir = true;
 
             lineC.UnRender();
         }
