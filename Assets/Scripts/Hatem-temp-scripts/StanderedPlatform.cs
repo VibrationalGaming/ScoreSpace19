@@ -17,7 +17,7 @@ public class StanderedPlatform : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
         }
     }
-
+    
     private void OnCollisionExit2D(Collision2D collision)
     {
         // Set playerscript inAir bool to true, too signify it is jumping
