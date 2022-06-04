@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private LineController lineC;
 
+    public bool inAir;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +32,8 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
 
         power = 5f;
-        minPower = new Vector2(-3f, -3f);
-        maxPower = new Vector2(3f, 3f);
+        minPower = new Vector2(-4f, -4f);
+        maxPower = new Vector2(4f, 4f);
 
         lineC = GetComponent<LineController>();
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !inAir)
         {
             // Dragging();
             start = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(start);
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !inAir)
         {
             Vector3 current = cam.ScreenToWorldPoint(Input.mousePosition);
             current.z = 15;
@@ -56,49 +58,24 @@ public class PlayerController : MonoBehaviour
             lineC.Render(start, current);
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !inAir)
         {
             end = cam.ScreenToWorldPoint(Input.mousePosition);
             end.z = 15;
+            Debug.Log(end);
 
             force = new Vector2(Mathf.Clamp(start.x - end.x, minPower.x, maxPower.x), 
                                 Mathf.Clamp(start.y - end.y, minPower.y, maxPower.y));
             
-            rb.AddForce(force * power, ForceMode2D.Impulse);
+
+            if (end.y < start.y)
+                rb.AddForce(force * power, ForceMode2D.Impulse);
+
+
+            // inAir = true;
 
             lineC.UnRender();
         }
+        
     }
-
-    private void Dragging()
-    {
-        // Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        start = cam.ScreenToWorldPoint(Input.mousePosition);
-        start.z = 15;
-        Debug.Log(start);
-
-        // rb.position = mousePosition;
-    }
-
-    // private void OnMouseDown()
-    // {
-    //     pressed = true;
-    //     rb.isKinematic = true;
-    //     // rb.bodyType = RigidbodyType2D.Dynamic;
-    // }
-
-    // private void OnMouseUp()
-    // {
-    //     pressed = false;
-    //     rb.isKinematic = false;
-    //     StartCoroutine(Release());
-    // }
-
-    // private IEnumerator Release()
-    // {
-    //     yield return new WaitForSeconds(releaseDelay);
-    //     sj.enabled = false;
-    // }
-
 }

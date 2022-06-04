@@ -7,36 +7,61 @@ public class SpikesPlatform : MonoBehaviour
     [SerializeField]
     string playerTag;
     [SerializeField]
-    float timeToRotate = 2;
+    float timeToRotate;
     float tempTime;
-    bool rotationBool = true;
+    
+    
+    private bool rotating;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.tag == playerTag)
-        collision.rigidbody.velocity = new Vector2(0, 0);
+        {
+            collision.rigidbody.velocity = new Vector2(0, 0);
+            collision.gameObject.GetComponent<PlayerController>().inAir = false;
+        }
     }
 
     private void Start()
     {
-        tempTime = timeToRotate;
-    }
-
-    void RotatePlatform()
-    {
-
-        if (rotationBool)
-            transform.rotation = new Quaternion(0, 0, 180, 0);
-        else
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-
-        rotationBool = !rotationBool;
-        timeToRotate = tempTime;
+        // tempTime = timeToRotate;
+        timeToRotate = 4f;
+        StartCoroutine(RotatePlatform(-18));
     }
 
     private void Update()
     {
-        timeToRotate -= Time.deltaTime;
-        if (timeToRotate <= 0)
-            RotatePlatform();
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Debug.Log(transform.localEulerAngles.z > 0);
+
+
+        // Rotate Anti-Clockwise
+        if (transform.localEulerAngles.z >= 180 && !rotating)
+            StartCoroutine(RotatePlatform(18));
+
+        // Rotate Clockwise
+        if (transform.localEulerAngles.z <= 0 && !rotating)
+            StartCoroutine(RotatePlatform(-18));
     }
+
+
+    private IEnumerator RotatePlatform(int rotate)
+    {
+        rotating = true;
+        Debug.Log("About to rotate");
+        yield return new WaitForSeconds(timeToRotate);
+
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.002f);
+            this.transform.Rotate(0,0, rotate);
+
+            Debug.Log(transform.localEulerAngles.z);
+        }
+
+        rotating = false;
+    }
+
 }

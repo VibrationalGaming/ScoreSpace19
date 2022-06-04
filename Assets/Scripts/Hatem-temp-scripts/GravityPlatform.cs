@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StanderedPlatform : MonoBehaviour
+public class GravityPlatform : MonoBehaviour
 {
     // [SerializeField]
     // string playerTag;
