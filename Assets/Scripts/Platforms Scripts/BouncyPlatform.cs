@@ -16,6 +16,7 @@ public class BouncyPlatform : MonoBehaviour
             // Set playerscript inAir bool to false, too allow jumping again
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
 
+            
             counter++;
             if (counter > 2)
             {
@@ -31,6 +32,10 @@ public class BouncyPlatform : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().inAir = true;
+            if (counter > 2)
+            {
+                counter = 0;
+            }
         }
     }
 }
