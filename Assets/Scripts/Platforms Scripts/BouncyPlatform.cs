@@ -17,12 +17,14 @@ public class BouncyPlatform : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
 
             
-            counter++;
-            if (counter > 2)
-            {
-                collision.rigidbody.velocity = new Vector2(0, 0);  
-                counter = 0;
-            }
+            // counter++;
+            // if (counter > 1)
+            // {
+            //     collision.rigidbody.velocity = new Vector2(0, 0);  
+            //     counter = 0;
+            // }
+
+
         }
     }
 
@@ -32,10 +34,12 @@ public class BouncyPlatform : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().inAir = true;
-            if (counter > 2)
-            {
-                counter = 0;
-            }
+            // if (counter > 1)
+            // {
+            //     counter = 0;
+            // }
+            this.GetComponent<Collider2D>().enabled = false;
+
         }
     }
 }
