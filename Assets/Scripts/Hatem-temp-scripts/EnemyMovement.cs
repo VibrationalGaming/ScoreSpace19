@@ -19,14 +19,16 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         followVec = targetTrans.position - transform.position;
+        enemyRb.velocity = fSpeed * followVec.normalized;
+    }
 
-        if (followVec.x <= 0.1 && followVec.y <= 0.1)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
             Destroy(playerRb.gameObject);
-            enemyRb.velocity = new(0,0);
+            enemyRb.velocity = new(0, 0);
             gameObject.GetComponent<EnemyMovement>().enabled = false;
         }
-        else
-            enemyRb.velocity = fSpeed * followVec.normalized;
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 public class SpikesPlatform : MonoBehaviour
 {
     [SerializeField]
-    string playerTag;
-    [SerializeField]
     float timeToRotate;
     float tempTime;
     
@@ -15,11 +13,20 @@ public class SpikesPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == playerTag)
+        if (collision.collider.tag == "Player")
         {
             collision.rigidbody.velocity = new Vector2(0, 0);
+
+            // Set playerscript inAir bool to false, too allow jumping again
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Set playerscript inAir bool to true, too signify it is jumping
+        if (collision.collider.tag == "Player")
+            collision.gameObject.GetComponent<PlayerController>().inAir = true;
     }
 
     private void Start()
