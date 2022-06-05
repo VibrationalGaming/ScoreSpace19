@@ -20,7 +20,6 @@ public class BouncyPlatform : MonoBehaviour
             counter++;
             if (counter > 2)
             {
-                //it will be implemented even if you're coliding multiple time by movement not just bouncyness
                 collision.rigidbody.velocity = new Vector2(0, 0);  
                 counter = 0;
             }
@@ -33,6 +32,10 @@ public class BouncyPlatform : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().inAir = true;
+            if (counter > 2)
+            {
+                counter = 0;
+            }
         }
     }
 }
