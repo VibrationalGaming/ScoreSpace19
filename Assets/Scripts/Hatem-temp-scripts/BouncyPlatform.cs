@@ -16,9 +16,11 @@ public class BouncyPlatform : MonoBehaviour
             // Set playerscript inAir bool to false, too allow jumping again
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
 
+            
             counter++;
             if (counter > 2)
             {
+                //it will be implemented even if you're coliding multiple time by movement not just bouncyness
                 collision.rigidbody.velocity = new Vector2(0, 0);  
                 counter = 0;
             }
