@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityPlatform : MonoBehaviour
+public class BouncyPlatform : MonoBehaviour
 {
     // [SerializeField]
     // string playerTag;
+
+    public int counter;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")
         {
-            collision.rigidbody.velocity = new Vector2(0, 0);
-            collision.rigidbody.gravityScale = 2.75f;
-
             // Set playerscript inAir bool to false, too allow jumping again
             collision.gameObject.GetComponent<PlayerController>().inAir = false;
+
+            counter++;
+            if (counter > 2)
+            {
+                collision.rigidbody.velocity = new Vector2(0, 0);  
+                counter = 0;
+            }
         }
     }
 
@@ -25,13 +31,6 @@ public class GravityPlatform : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().inAir = true;
-            StartCoroutine(ResetGravity(collision));
         }
-    }
-
-    private IEnumerator ResetGravity(Collision2D player)
-    {
-        yield return new WaitForSeconds(0.5f);
-        player.rigidbody.gravityScale = 3f;
     }
 }

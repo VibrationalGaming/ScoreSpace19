@@ -50,7 +50,7 @@ public class SpikesPlatform : MonoBehaviour
     private IEnumerator RotatePlatform(int rotate)
     {
         rotating = true;
-        Debug.Log("About to rotate");
+        // Debug.Log("About to rotate");
         yield return new WaitForSeconds(timeToRotate);
 
         for (int i = 0; i < 10; i++)
@@ -58,7 +58,7 @@ public class SpikesPlatform : MonoBehaviour
             yield return new WaitForSeconds(0.002f);
             this.transform.Rotate(0,0, rotate);
 
-            Debug.Log(transform.localEulerAngles.z);
+            // Debug.Log(transform.localEulerAngles.z);
         }
 
         rotating = false;

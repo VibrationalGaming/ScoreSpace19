@@ -8,12 +8,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float power;
 
     private Rigidbody2D rb;
 
-    private Vector2 minPower;
-    private Vector2 maxPower;
+    public float power;
+    public Vector2 minPower;
+    public Vector2 maxPower;
 
     private Camera cam;
     private Vector2 force;
@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviour
 
         cam = Camera.main;
 
-        power = 5f;
-        minPower = new Vector2(-4f, -4f);
-        maxPower = new Vector2(4f, 4f);
+        power = 2f;
+        minPower = new Vector2(-7f, -7f);
+        maxPower = new Vector2(7f, 7f);
 
         lineC = GetComponent<LineController>();
 
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
             // Dragging();
             start = cam.ScreenToWorldPoint(Input.mousePosition);
             start.z = 15;
-            Debug.Log(start);
+            // Debug.Log(start);
         }
 
         if (Input.GetMouseButton(0) && !inAir)
@@ -62,18 +62,15 @@ public class PlayerController : MonoBehaviour
         {
             end = cam.ScreenToWorldPoint(Input.mousePosition);
             end.z = 15;
-            Debug.Log(end);
+            // Debug.Log(end);
 
             force = new Vector2(Mathf.Clamp(start.x - end.x, minPower.x, maxPower.x), 
                                 Mathf.Clamp(start.y - end.y, minPower.y, maxPower.y));
-            
 
             if (end.y < start.y)
                 rb.AddForce(force * power, ForceMode2D.Impulse);
 
-
-            inAir = true;
-
+            // inAir = true;
             lineC.UnRender();
         }
         
