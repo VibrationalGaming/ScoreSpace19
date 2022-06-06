@@ -14,9 +14,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     AudioSource audio;
 
+    Vector2 startPosition;
+
     void Start()
     {
         enemyRb = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
     }
     void Update()
     {
@@ -35,6 +38,7 @@ public class EnemyMovement : MonoBehaviour
             PlayerRb.velocity = new Vector2(0, 0);
             collision.gameObject.transform.position = new Vector3(-7f, 1.5f, 0f);
             enemyRb.velocity = new(0, 0);
+            transform.position = startPosition;
             //gameObject.GetComponent<EnemyMovement>().enabled = false;
         }
     }

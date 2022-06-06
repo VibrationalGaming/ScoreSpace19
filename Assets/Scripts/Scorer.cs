@@ -15,7 +15,7 @@ public class Scorer : MonoBehaviour
     void Start()
     {
         if (PlayerPrefs.GetInt("FinalScore") == 0)
-            scoreAmt = 5000f;
+            scoreAmt = 10000f;
         else
             scoreAmt = PlayerPrefs.GetInt("FinalScore");
 
@@ -30,7 +30,7 @@ public class Scorer : MonoBehaviour
             PlayerPrefs.SetInt("FinalScore", (int) scoreAmt);
 
             scoreTxt.text = "Score: " + (int) scoreAmt;
-            scoreAmt -= (pointsChanged * Time.deltaTime) * 2;
+            scoreAmt -= (pointsChanged * Time.deltaTime) * 5;
         }
     }
 }

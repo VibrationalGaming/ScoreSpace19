@@ -4056,7 +4056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 199.99998}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1491102877
@@ -5518,7 +5518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: 2070572065}
-  destroyTag: 
 --- !u!82 &2070572065
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5624,7 +5623,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7038151928317941832, guid: 3a5f0d6ef8a09344b959e335a5b51642, type: 3}
       propertyPath: scene
-      value: GameFinish
+      value: Level2
       objectReference: {fileID: 0}
     - target: {fileID: 7038151928317941833, guid: 3a5f0d6ef8a09344b959e335a5b51642, type: 3}
       propertyPath: m_RootOrder
