@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
     public bool inAir;
 
+    public AudioSource audio;
+    public AudioClip gettingReady;
+    public AudioClip jumpingWhoosh;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +36,9 @@ public class PlayerController : MonoBehaviour
 
         cam = Camera.main;
 
-        power = 1.5f;
-        minPower = new Vector2(-7f, -7f);
-        maxPower = new Vector2(7f, 7f);
+        power = 2f;
+        minPower = new Vector2(-5f, -5f);
+        maxPower = new Vector2(5f, 5f);
 
         lineC = GetComponent<LineController>();
 
@@ -47,6 +52,9 @@ public class PlayerController : MonoBehaviour
             // Dragging();
             start = cam.ScreenToWorldPoint(Input.mousePosition);
             start.z = 15;
+
+            audio.clip = gettingReady;
+            audio.Play();
             // Debug.Log(start);
         }
 
@@ -68,7 +76,11 @@ public class PlayerController : MonoBehaviour
                                 Mathf.Clamp(start.y - end.y, minPower.y, maxPower.y));
 
             if (end.y < start.y)
+            {
                 rb.AddForce(force * power, ForceMode2D.Impulse);
+                audio.clip = jumpingWhoosh;
+                audio.Play();
+            }
 
             // inAir = true;
             lineC.UnRender();

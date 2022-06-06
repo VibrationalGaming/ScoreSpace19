@@ -8,6 +8,8 @@ public class SpikesPlatform : MonoBehaviour
     float timeToRotate;
     float tempTime;
     
+    public AudioSource audio;
+
     
     private bool rotating;
 
@@ -15,6 +17,9 @@ public class SpikesPlatform : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
+
+            audio.Play();
+
             collision.rigidbody.velocity = new Vector2(0, 0);
 
             // Set playerscript inAir bool to false, too allow jumping again
