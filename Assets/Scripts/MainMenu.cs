@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
+        PlayerPrefs.SetInt("FinalScore", 0);
         StartCoroutine(PlayGameCon());
     }
     public void QuitGame()
