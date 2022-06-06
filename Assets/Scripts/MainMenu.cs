@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayClickSound.Play();
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Leaderboard");
     }
 
     private IEnumerator QuitGameCon()
