@@ -8,6 +8,10 @@ public class MainMenu : MonoBehaviour
     public AudioSource PlayClickSound;
     public AudioSource QuitClickSound;
 
+    public void LeaderBoard()
+    {
+        StartCoroutine(LeaderBoardCon());
+    }
     public void PlayGame()
     {
         StartCoroutine(PlayGameCon());
@@ -20,7 +24,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayClickSound.Play();
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene("Leaderboard");
+        SceneManager.LoadScene("Level1");
     }
 
     private IEnumerator QuitGameCon()
@@ -29,5 +33,12 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Quit!");
         Application.Quit();
+    }
+
+    private IEnumerator LeaderBoardCon()
+    {
+        PlayClickSound.Play();
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("LeaderBoard");
     }
 }
