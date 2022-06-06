@@ -2,6 +2,8 @@ using UnityEngine.UI;
 using LootLocker.Requests;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class LeaderBoardController : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class LeaderBoardController : MonoBehaviour
 
     private void Start()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (response.success)
@@ -23,6 +27,12 @@ public class LeaderBoardController : MonoBehaviour
                 Debug.Log("Failed");
             }
         });
+
+        if (currentScene.name == "GameFinish")
+        {
+            PlayerScore.text = PlayerPrefs.GetInt("FinalScore").ToString();
+        }
+
     }
 
     public void ShowScores()
@@ -63,6 +73,7 @@ public class LeaderBoardController : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("Success");
+                SceneManager.LoadScene("Menu");
             }
             else
             {

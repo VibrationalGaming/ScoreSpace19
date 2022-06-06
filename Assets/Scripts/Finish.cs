@@ -8,6 +8,8 @@ public class Finish : MonoBehaviour
 {
     private Scorer scorer;
     private float finalScore;
+
+    public string scene;
     
     void Start()
     {
@@ -21,7 +23,7 @@ public class Finish : MonoBehaviour
             PlayerPrefs.SetInt("FinalScore", (int) scorer.scoreAmt);
             Debug.Log(PlayerPrefs.GetInt("FinalScore"));
 
-            SceneManager.LoadScene("GameFinish");
+            SceneManager.LoadScene(scene);
         }
     }
 }
