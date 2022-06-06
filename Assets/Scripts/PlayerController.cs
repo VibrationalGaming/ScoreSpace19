@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
         cam = Camera.main;
 
-        power = 2f;
+        power = 1.5f;
         minPower = new Vector2(-7f, -7f);
         maxPower = new Vector2(7f, 7f);
 

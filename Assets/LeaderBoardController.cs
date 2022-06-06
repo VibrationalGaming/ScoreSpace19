@@ -11,7 +11,7 @@ public class LeaderBoardController : MonoBehaviour
 
     private void Start()
     {
-        LootLockerSDKManager.StartSession("Player", (response) =>
+        LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (response.success)
             {
