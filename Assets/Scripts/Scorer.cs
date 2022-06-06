@@ -27,8 +27,8 @@ public class Scorer : MonoBehaviour
     {
         if (scoreAmt > 0)
         {
-            PlayerPrefs.SetInt("FinalScore", (int) scoreAmt)
-            
+            PlayerPrefs.SetInt("FinalScore", (int) scoreAmt);
+
             scoreTxt.text = "Score: " + (int) scoreAmt;
             scoreAmt -= (pointsChanged * Time.deltaTime) * 2;
         }
