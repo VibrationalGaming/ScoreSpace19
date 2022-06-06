@@ -14,7 +14,9 @@ public class Scorer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreAmt = 5000f;
+        if (PlayerPrefs.GetInt("FinalScore") == 0)
+            scoreAmt = 5000f;
+
         pointsChanged = 1f;
     }
 
@@ -24,7 +26,7 @@ public class Scorer : MonoBehaviour
         if (scoreAmt > 0)
         {
             scoreTxt.text = "Score: " + (int) scoreAmt;
-            scoreAmt -= pointsChanged * Time.deltaTime;
+            scoreAmt -= (pointsChanged * Time.deltaTime) * 2;
         }
     }
 }
