@@ -20,10 +20,18 @@ public class Finish : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerPrefs.SetInt("FinalScore", (int) scorer.scoreAmt);
-            Debug.Log(PlayerPrefs.GetInt("FinalScore"));
-
-            SceneManager.LoadScene(scene);
+            Destroy(collision.gameObject);
+            StartCoroutine(ShowScreen());
         }
+    }
+    
+    IEnumerator ShowScreen()
+    {
+        gameObject.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1f);
+        PlayerPrefs.SetInt("FinalScore", (int)scorer.scoreAmt);
+        Debug.Log(PlayerPrefs.GetInt("FinalScore"));
+
+        SceneManager.LoadScene(scene);
     }
 }

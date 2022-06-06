@@ -9,8 +9,10 @@ public class EnemyMovement : MonoBehaviour
     public float fSpeed;
     Rigidbody2D enemyRb;
     [SerializeField]
-    Rigidbody2D playerRb;
-
+    Rigidbody2D PlayerRb;
+    public float distance;
+    [SerializeField]
+    AudioSource audio;
 
     void Start()
     {
@@ -19,16 +21,21 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         followVec = targetTrans.position - transform.position;
-        enemyRb.velocity = fSpeed * followVec.normalized;
+        if (Mathf.Abs(followVec.x) <= distance)
+            enemyRb.velocity = fSpeed * followVec.normalized;
+        else
+            enemyRb.velocity = new Vector2(0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            Destroy(playerRb.gameObject);
+            audio.Play();
+            PlayerRb.velocity = new Vector2(0, 0);
+            collision.gameObject.transform.position = new Vector3(-7f, 1.5f, 0f);
             enemyRb.velocity = new(0, 0);
-            gameObject.GetComponent<EnemyMovement>().enabled = false;
+            //gameObject.GetComponent<EnemyMovement>().enabled = false;
         }
     }
 }
