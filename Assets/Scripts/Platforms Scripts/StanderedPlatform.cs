@@ -6,11 +6,15 @@ public class StanderedPlatform : MonoBehaviour
 {
     // [SerializeField]
     // string playerTag;
+    public AudioSource audio;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")
         {
+            audio.Play();
+
             collision.rigidbody.velocity = new Vector2(0, 0);
 
             // Set playerscript inAir bool to false, too allow jumping again

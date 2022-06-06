@@ -14,7 +14,7 @@ public class Scorer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreAmt = 5f;
+        scoreAmt = 5000f;
         pointsChanged = 1f;
     }
 
